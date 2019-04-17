@@ -1,0 +1,102 @@
+<vxml version="2.1">
+<form>
+	<record  name="msg" beep="true" maxtime="15s"
+       finalsilence="6000ms" dtmfterm="true" type="audio/x-wav">
+       <prompt timeout="5s">
+         Welcome to Radio à tous, please say your name after the beep
+       </prompt>
+       <noinput>
+         I didn't hear anything, please try again.
+       </noinput>
+	   <filled>Thank You
+	   <goto next="#village"/></filled>
+	   
+    </record>
+	
+</form>
+<form id = "village">
+
+	<record  name="msg" beep="true" maxtime="15s"
+       finalsilence="6000ms" dtmfterm="true" type="audio/x-wav">
+       <prompt timeout="5s">
+	   <break time="0.5s"/>
+        Please say the name of your home village after the beep
+       </prompt>
+       <noinput>
+         I didn't hear anything, please try again.
+       </noinput>
+	   <filled>Thank You
+	   <goto next="#message_option"/></filled>
+     </record>
+	
+</form>
+
+
+<menu id = "message_option" dtmf="true">
+  <property name="inputmodes" value="dtmf"/>
+  <prompt>
+  <break time="0.5s"/>
+   To leave a general message press 1. To leave an organizational message press 2.
+  </prompt>
+  <choice dtmf="1" next="#general_message"/>
+  <choice dtmf="2" next="#organizational_message"/>
+  
+
+</menu>
+
+
+	<menu id="general_message">
+  		<property name="inputmodes" value="dtmf"/>
+  		<prompt>
+   		To upload a News message press 1. To upload a weather message press 2. To upload an Entertainment message press 3.
+  		</prompt>
+  	<choice dtmf="1" next="#title"/>
+  	<choice dtmf="2" next="#title"/>
+  	<choice dtmf="3" next="#title"/>
+	</menu>
+
+
+	<menu id="organizational_message">
+  		<property name="inputmodes" value="dtmf"/>
+  		<prompt>
+   		To upload Product News press 1. To upload Discount news press 2. To upload General News press 3.
+  		</prompt>
+  	<choice dtmf="1" next="#title"/>
+  	<choice dtmf="2" next="#title"/>
+  	<choice dtmf="3" next="#title"/>
+	</menu>
+
+
+<form id="title">
+
+<record  name="msg" beep="true" maxtime="15s"
+       finalsilence="6000ms" dtmfterm="true" type="audio/x-wav">
+       <prompt timeout="5s">
+         Please Say the title of your message after the beep
+       </prompt>
+       <noinput>
+         I didn't hear anything, please try again.
+       </noinput>
+	   <filled>Thank You
+	   <goto next="#record_message"/></filled>
+     </record>
+
+</form>
+
+<form id = "record_message">
+
+<record  name="msg" beep="true" maxtime="600s"
+       finalsilence="6000ms" dtmfterm="true" type="audio/x-wav">
+       <prompt timeout="5s">
+	   <break time="0.5s"/>
+         Please leave your message after the beep
+       </prompt>
+       <noinput>
+         I didn't hear anything, please try again.
+       </noinput>
+	   <filled>Thank You for uploading a message. </filled>
+     </record>
+
+</form> 
+
+</vxml>
